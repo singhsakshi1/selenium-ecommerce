@@ -1,0 +1,54 @@
+package org.examples.test;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ECommerce {
+
+    public static void main(String[] args) {
+
+        System.setProperty("webdriver.Chrome.Driver","src/test/resources/drivers/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        driver.get("http://www.tutorialsninja.com/demo/");
+        driver.manage().window().maximize();
+        driver.findElement(By.xpath("//a[@title='My Account']")).click();
+        driver.findElement(By.xpath("//a[text()='Login']")).click();
+        driver.findElement(By.id("input-email")).sendKeys("sofiastark@gmail.com");
+        driver.findElement(By.id("input-password")).sendKeys("test1234");
+        driver.findElement(By.xpath("//input[@value='Login']")).click();
+        driver.findElement(By.xpath("//a[text()='Laptops & Notebooks']")).click();
+        driver.findElement(By.xpath("//a[text()='Show All Laptops & Notebooks']")).click();
+        driver.findElement(By.xpath("(//span[text()='Add to Cart'])[3]")).click();
+        driver.findElement(By.xpath("(//span[text()='Add to Cart'])[4]")).click();
+        driver.findElement(By.xpath("//a[@title='Shopping Cart']")).click();
+        String product1= driver.findElement(By.xpath("(//a[contains(@href,'product_id=44')])[4]")).getText();
+        String product2= driver.findElement(By.xpath("(//a[contains(@href,'product_id=45')])[4]")).getText();
+        if(product1.equals("MacBook Air")){
+            System.out.println("product1 text is correct");
+
+        }
+        else {
+            System.out.println("product1 text is  not correct");
+        }
+        if(product2.equals("MacBook Pro")){
+            System.out.println("product2 text is correct");
+
+        }
+        else {
+            System.out.println("product2 text is  not correct");
+        }
+        String total= driver.findElement(By.xpath("(//table[@class='table table-bordered'])[3]//tr[2]//td[2]")).getText();
+        if(total.equals("$3,000.00")){
+            System.out.println("total is correct");
+        }
+        else{
+            System.out.println("total is not correct");
+        }
+        driver.findElement(By.xpath("//a[@class='btn btn-primary']")).click();
+        driver.quit();
+    }
+
+
+}
+
